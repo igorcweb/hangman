@@ -1,7 +1,30 @@
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
 }
 
+div.game {
+  margin-top: 15px;
+  margin-left: 80px;
+  margin-right: 20px;
+}
+h1 {
+  text-align: center;
+  font-weight: normal;
+}
 canvas {
-  border: 1px solid black;
+  margin-left: -350px;
+}
+
+p#answerText {
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 7px;
+}
+
+@media screen and (min-width: 620px) {
+  body {
+    flex-direction: row;
+  }
 }
