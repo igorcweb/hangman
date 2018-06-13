@@ -58,7 +58,7 @@ function drawMan() {
   if (mistakes === 6) {
     c.strokeStyle = '#ff0000';
     c.stroke();
-    setTimeout(function() {
+    setTimeout(function () {
       c.moveTo(1100, 300);
       c.lineTo(1050, 290);
       c.strokeStyle = '#000';
@@ -84,9 +84,13 @@ function getData() {
   axios
     .get(url)
     .then(res => {
+      const letters = /^[A-Za-z]+$/;
       let answer = res.data.results[0].correct_answer;
+      if (!(answer.match(letters))) {
+        getData();
+      }
       let answerArr = answer.toLowerCase().split('');
-      if (answer.length >= 6 && !answer.includes(' ')) {
+      if (answer.length >= 6) {
         correctAnswer = res.data.results[0].correct_answer;
       } else {
         getData();
@@ -100,8 +104,7 @@ function getData() {
         .join('');
       answerText.innerHTML = placeholder;
       let placeholderArr = placeholder.split('');
-      document.onkeyup = function(event) {
-        console.log(event);
+      document.onkeyup = function (event) {
         if (event.keyCode === 13) {
           reset();
           return;

@@ -7,10 +7,12 @@ body {
 }
 
 .message.lose::after {
+  color: red;
   content: 'You have been hanged!';
 }
 
 .message.win::after {
+  color: green;
   content: 'You win!';
 }
 
