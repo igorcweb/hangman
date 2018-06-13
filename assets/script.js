@@ -103,11 +103,12 @@ function getData() {
           return letter.replace(letter, '_');
         })
         .join('');
+      3;
       let placeholderArr = placeholder.split('');
       if (answer.indexOf(' ') !== -1) {
         spaceIndexArr = [];
-        for (let i = 0; i < placeholderArr.length; i++) {
-          if (placeholderArr[i] === ' ') {
+        for (let i = 0; i < answerArr.length; i++) {
+          if (answerArr[i] === ' ') {
             spaceIndexArr.push(i);
           }
         }
@@ -115,6 +116,8 @@ function getData() {
           placeholderArr.splice(index, 1, ' ');
         });
       }
+
+      placeholder = placeholderArr.join('');
 
       answerText.innerHTML = placeholder;
 
