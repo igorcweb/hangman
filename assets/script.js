@@ -149,9 +149,6 @@ function getData() {
 
           placeholder = placeholderArr.join('');
 
-          console.log('spaceIndexArr:', spaceIndexArr);
-          console.log('hello');
-
           placeholderArr.splice(0, 1, placeholderArr[0].toUpperCase());
 
           placeholder = placeholderArr.join('');
