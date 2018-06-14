@@ -63,11 +63,11 @@ button {
   padding: 10px;
   margin-left: 50%;
   transform: translateX(-50%);
-  border: 1px solid steelblue;
+  border: 2px solid steelblue;
 }
 
 button:hover {
-  background-color: #fff;
+  background-color: #f3f3f3;
   color: steelblue;
 }
 
