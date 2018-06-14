@@ -85,7 +85,7 @@ function getData() {
     .get(url)
     .then(res => {
       const letters = /^[a-zA-Z ]+$/;
-      let answer = res.data.results[0].correct_answer;
+      let answer = res.data.results[0].correct_answer.trim();
       console.log('answer: ', answer);
       if (!answer.match(letters)) {
         reset();
@@ -104,9 +104,9 @@ function getData() {
         })
         .join('');
       3;
+      spaceIndexArr = [];
       let placeholderArr = placeholder.split('');
       if (answer.indexOf(' ') !== -1) {
-        spaceIndexArr = [];
         for (let i = 0; i < answerArr.length; i++) {
           if (answerArr[i] === ' ') {
             spaceIndexArr.push(i);
@@ -139,16 +139,17 @@ function getData() {
             placeholderArr.splice(index, 1, guess);
           });
 
-          spaceIndexArr.forEach(index => {
-            placeholderArr.splice(
-              index + 1,
-              1,
-              placeholderArr[index + 1].toUpperCase()
-            );
-          });
+          if (spaceIndexArr.length > 0) {
+            spaceIndexArr.forEach(index => {
+              placeholderArr.splice(
+                index + 1,
+                1,
+                placeholderArr[index + 1].toUpperCase()
+              );
+            });
+          }
 
-          placeholder = placeholderArr.join('');
-
+          //Capitalize the first letter of the answer array
           placeholderArr.splice(0, 1, placeholderArr[0].toUpperCase());
 
           placeholder = placeholderArr.join('');
@@ -187,8 +188,3 @@ function reset() {
   c.lineWidth = 10;
   getData();
 }
-
-// arr.reduce((indexArr, val, index) => {
-//   if (val === guess) indexArr.push(index);
-//   return indexArr;
-// }, []);
