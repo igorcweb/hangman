@@ -287,4 +287,6 @@
     ul.classList.add('collapsed');
     hangman.classList.remove('slide');
   });
+  const year = document.querySelector('#year');
+  year.innerText = new Date().getFullYear();
 })();
