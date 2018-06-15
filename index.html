@@ -5,22 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Hangman</title>
 </head>
 
 <body>
-  <canvas style="width: 590px; height: 370px;">
+  <header>
+    <nav>
+      <h4 class="category">Select Category</h4>
+      <ul class="collapsed">
+        <li data-category="Books">Books</li>
+        <li data-category="Computer Science">Computer Science</li>
+        <li data-category="General Knowledge">General Knowledge</li>
+        <li data-category="Geography">Geography</li>
+        <li data-category="Film">Film</li>
+        <li data-category="History">History</li>
+        <li data-category="Music">Music</li>
+        <li data-category="Politics">Politics</li>
+        <li data-category="Sports">Sports</li>
+        <li data-category="Television">Television</li>
+      </ul>
+    </nav>
+  </header>
+  <div class="hangman">
+    <canvas style="width: 590px; height: 370px;">
 
-  </canvas>
-  <div class="game">
-    <h1>Music Trivia HANGMAN</h1>
-    <p id="questionText"></p>
-    <p id="answerText"></p>
-    <h2 class="message"></h2>
-    <button id="next">Press Any Key to Continue</button>
-    <h3 id="used"></h3>
+    </canvas>
+    <div class="game">
+      <h1>
+        <span id="category">General Knowledge</span> Trivia HANGMAN</h1>
+      <p id="questionText"></p>
+      <p id="answerText"></p>
+      <h2 class="message"></h2>
+      <button id="next">Press Any Key to Continue</button>
+      <h3 id="used"></h3>
+    </div>
   </div>
+
 
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

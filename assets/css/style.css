@@ -1,18 +1,77 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+}
+
+div.hangman {
   display: flex;
   flex-direction: column;
+}
+nav {
+  position: relative;
+  z-index: 1;
+
+  height: 42px;
+  background-color: steelblue;
+  text-align: center;
+}
+h4.category {
+  padding: 8px;
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #fff;
+  font-weight: normal;
   margin: 0;
 }
 
-span.correct {
+ul {
+  color: #fff;
+  padding-top: 0;
+  background-color: steelblue;
+  text-align: left;
+  padding-left: 0;
+  position: absolute;
+  list-style: none;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.3s ease-in-out;
+}
+
+ul.collapsed {
+  top: -340px;
+}
+li {
+  letter-spacing: 1px;
+  border: 1px solid steelblue;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+li {
+  border-top: 2px solid silver;
+  border-right: 2px solid silver;
+  border-left: 2px solid silver;
+}
+
+li:hover {
+  color: steelblue;
+  background-color: #fff;
+}
+
+/* span.correct {
   color: green;
 }
 
 span.wrong {
   color: red;
-}
+} */
 
 .message.lose::after {
   color: red;
@@ -46,6 +105,7 @@ h3 {
   margin-top: 30px;
   font-weight: normal;
 }
+
 canvas {
   margin-left: 115px;
 }
@@ -90,12 +150,12 @@ button:hover {
 }
 
 @media screen and (min-width: 750px) {
-  body {
+  div.hangman {
     flex-direction: row;
   }
 
   div.game {
-    margin-left: -250px;
+    margin-left: -270px;
     max-width: 600px;
   }
   canvas {
