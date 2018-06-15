@@ -1,12 +1,26 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
-}
-
-div.hangman {
   display: flex;
   flex-direction: column;
 }
+
+div.hangman {
+  position: relative;
+  left: 0;
+  flex: 1 0 auto;
+  transition: left 0.3s ease-in-out;
+}
+
+div.hangman.slide {
+  left: 200px;
+}
+
 nav {
   position: relative;
   z-index: 1;
@@ -19,9 +33,8 @@ h4.category {
   padding: 8px;
   z-index: 1;
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   cursor: pointer;
   font-size: 1.2rem;
   letter-spacing: 1px;
@@ -39,13 +52,12 @@ ul {
   position: absolute;
   list-style: none;
   top: 26px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: top 0.3s ease-in-out;
+  transition: left 0.3s ease-in-out;
 }
 
 ul.collapsed {
-  top: -340px;
+  /* top: -340px; */
+  left: -200px;
 }
 li {
   letter-spacing: 1px;
@@ -90,6 +102,19 @@ span.wrong {
 div.game {
   margin: 20px auto;
   padding: 0 20px;
+}
+
+h1 {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 h1,
@@ -149,13 +174,35 @@ button:hover {
   color: steelblue;
 }
 
-@media screen and (min-width: 750px) {
-  div.hangman {
-    flex-direction: row;
-  }
+footer {
+  flex-shrink: 0;
+}
+footer p {
+  margin: 0;
+  font-size: 80%;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
 
+@media screen and (min-width: 960px) {
+  h1 {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  h4 {
+    left: 8px;
+  }
+  ul {
+    left: 0;
+  }
   div.game {
-    margin-left: -270px;
+    position: absolute;
+    top: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* margin-left: -270px; */
     max-width: 600px;
   }
   canvas {

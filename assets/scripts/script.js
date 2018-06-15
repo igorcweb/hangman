@@ -1,5 +1,6 @@
 (function() {
   const body = document.querySelector('body');
+  const hangman = document.querySelector('div.hangman');
   const canvas = document.querySelector('canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -189,7 +190,6 @@
           document.onkeyup = function(event) {
             if (event.keyCode === 13) {
               game.reset();
-              return;
             }
 
             let guess = event.key;
@@ -268,22 +268,23 @@
   category.addEventListener('click', e => {
     e.stopPropagation();
     ul.classList.toggle('collapsed');
+    hangman.classList.toggle('slide');
   });
   category.addEventListener('mouseover', () => {
-    ul.classList.toggle('collapsed');
+    ul.classList.remove('collapsed');
+    hangman.classList.add('slide');
   });
   lis.forEach(li => {
     li.addEventListener('click', function() {
       ul.classList.add('collapsed');
-      console.log('game: ', game);
+      hangman.classList.remove('slide');
       game.selectedCategory = this.dataset.category;
-      console.log('selectedCategory: ', game.selectedCategory);
       categoryTitle.innerText = game.selectedCategory;
-      console.log('categoryTitle: ', categoryTitle);
       game.reset();
     });
   });
   body.addEventListener('click', () => {
     ul.classList.add('collapsed');
+    hangman.classList.remove('slide');
   });
 })();
