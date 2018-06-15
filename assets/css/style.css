@@ -6,11 +6,23 @@ body {
   margin: 0;
 }
 
+span.correct {
+  color: green;
+}
+
+span.wrong {
+  color: red;
+}
+
 .message.lose::after {
   color: red;
   content: 'You have been hanged!';
 }
 
+.message.survived::after {
+  color: green;
+  content: 'You survived by a thread!';
+}
 .message.win::after {
   color: green;
   content: 'You win!';
@@ -30,6 +42,10 @@ h2 {
 h2 {
   font-size: 2rem;
 }
+h3 {
+  margin-top: 30px;
+  font-weight: normal;
+}
 canvas {
   margin-left: 115px;
 }
@@ -41,7 +57,7 @@ p#answerText {
 }
 
 p#questionText {
-  line-height: 2rem;
+  line-height: 1.5rem;
   max-width: 700px;
   text-align: center;
   font-size: 1.2rem;
@@ -69,7 +85,7 @@ button {
 }
 
 button:hover {
-  background-color: #f7f7f7;
+  background-color: #fafafa;
   color: steelblue;
 }
 
@@ -79,7 +95,8 @@ button:hover {
   }
 
   div.game {
-    margin-left: -280px;
+    margin-left: -250px;
+    max-width: 600px;
   }
   canvas {
     margin-left: 30px;

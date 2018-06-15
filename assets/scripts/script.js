@@ -7,6 +7,9 @@
   const c = canvas.getContext('2d');
   let blank = 'transparent';
   let mistakes = 0;
+  let usedLetters = [];
+  const span = document.createElement('span');
+  const h3 = document.getElementById('used');
 
   //gallows
   c.beginPath();
@@ -60,7 +63,7 @@
       c.stroke();
       setTimeout(function() {
         c.moveTo(346, 300);
-        c.lineTo(300, 290);
+        c.lineTo(295, 290);
         c.strokeStyle = '#000';
         c.stroke();
         answerText.innerHTML = correctAnswer;
@@ -86,13 +89,14 @@
       .get(url)
       .then(res => {
         //Exclude answers that contain non-letter characters
-        const letters = /^[a-zA-Z ]+$/;
+        const lettersSpaces = /^[a-zA-Z ]+$/;
         let answer = res.data.results[0].correct_answer.trim();
         console.log('answer: ', answer);
-        if (!answer.match(letters)) {
+        if (!answer.match(lettersSpaces)) {
           getData();
         }
 
+        //Only use answers are at least 6-letters-long.
         if (answer.length >= 6) {
           correctAnswer = res.data.results[0].correct_answer;
         } else {
@@ -118,6 +122,8 @@
         let answerArr = answer.toLowerCase().split('');
         spaceIndexArr = [];
         let placeholderArr = placeholder.split('');
+
+        //Add spaces if needed
         if (answer.indexOf(' ') !== -1) {
           for (let i = 0; i < answerArr.length; i++) {
             if (answerArr[i] === ' ') {
@@ -133,50 +139,68 @@
 
         answerText.innerHTML = placeholder;
 
+        //Press Enter to skip question
         document.onkeyup = function(event) {
           if (event.keyCode === 13) {
             reset();
             return;
           }
+
           let guess = event.key;
-          if (answer.toLowerCase().indexOf(guess) !== -1) {
-            indexArr = [];
-            for (let i = 0; i < answerArr.length; i++) {
-              if (answerArr[i] === guess) {
-                indexArr.push(i);
+          if (
+            //only listen for keys that haven't been used
+            !usedLetters.includes(guess) &&
+            //only listen for letter keys
+            (event.keyCode >= 65 && event.keyCode <= 90)
+          ) {
+            usedLetters.push(guess);
+            h3.innerText = 'Used Letters: ';
+            let usedLetter = document.createTextNode(`${guess.toUpperCase()} `);
+            span.appendChild(usedLetter);
+            h3.appendChild(span);
+
+            // Check if the guess matches the one of the letters
+            if (answer.toLowerCase().indexOf(guess) !== -1) {
+              indexArr = [];
+              for (let i = 0; i < answerArr.length; i++) {
+                if (answerArr[i] === guess) {
+                  indexArr.push(i);
+                }
               }
-            }
 
-            indexArr.forEach(index => {
-              placeholderArr.splice(index, 1, guess);
-            });
-
-            //Capitalize letters following a space
-            if (spaceIndexArr.length > 0) {
-              spaceIndexArr.forEach(index => {
-                placeholderArr.splice(
-                  index + 1,
-                  1,
-                  placeholderArr[index + 1].toUpperCase()
-                );
+              indexArr.forEach(index => {
+                placeholderArr.splice(index, 1, guess);
               });
-            }
 
-            //Capitalize the first letter of the answer array
-            placeholderArr.splice(0, 1, placeholderArr[0].toUpperCase());
+              //Capitalize letters following a space
+              if (spaceIndexArr.length > 0) {
+                spaceIndexArr.forEach(index => {
+                  placeholderArr.splice(
+                    index + 1,
+                    1,
+                    placeholderArr[index + 1].toUpperCase()
+                  );
+                });
+              }
 
-            placeholder = placeholderArr.join('');
-            answerText.innerHTML = placeholder;
-            if (placeholder.indexOf('_') === -1) {
-              message.classList.add('win');
-              button.classList.add('show');
-              document.onkeyup = function() {
-                reset();
-              };
+              //Capitalize the first letter of the answer array
+              placeholderArr.splice(0, 1, placeholderArr[0].toUpperCase());
+
+              placeholder = placeholderArr.join('');
+              answerText.innerHTML = placeholder;
+              if (placeholder.indexOf('_') === -1) {
+                mistakes === 5
+                  ? message.classList.add('survived')
+                  : message.classList.add('win');
+                button.classList.add('show');
+                document.onkeyup = function() {
+                  reset();
+                };
+              }
+            } else {
+              mistakes++;
+              drawMan();
             }
-          } else {
-            mistakes++;
-            drawMan();
           }
         };
       })
@@ -193,9 +217,13 @@
     button.classList.remove('show');
     answerText.innerHTML = '';
     mistakes = 0;
+    span.innerText = '';
+    h3.innerText = '';
+    usedLetters = [];
     blank = '#fff';
     message.classList.remove('lose');
     message.classList.remove('win');
+    message.classList.remove('survived');
     c.lineWidth = 13;
     drawMan();
     c.lineWidth = 10;
