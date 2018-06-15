@@ -17,6 +17,20 @@
   let correctAnswer;
 
   const game = {
+    drawGallows: function() {
+      //gallows
+      c.beginPath();
+      c.lineWidth = 10;
+      c.moveTo(0, 600);
+      c.lineTo(410, 600);
+      c.moveTo(100, 600);
+      c.lineTo(100, 100);
+      c.lineTo(350, 100);
+      c.lineTo(350, 185);
+      c.moveTo(155, 100);
+      c.lineTo(100, 160);
+      c.stroke();
+    },
     drawMan: function() {
       //head
       c.beginPath();
@@ -221,19 +235,7 @@
     }
   };
 
-  //gallows
-  c.beginPath();
-  c.lineWidth = 10;
-  c.moveTo(0, 600);
-  c.lineTo(410, 600);
-  c.moveTo(100, 600);
-  c.lineTo(100, 100);
-  c.lineTo(350, 100);
-  c.lineTo(350, 185);
-  c.moveTo(155, 100);
-  c.lineTo(100, 160);
-  c.stroke();
-
+  game.drawGallows();
   game.getData();
   next.addEventListener('click', () => {
     game.reset();
