@@ -153,7 +153,8 @@
           if (
             question.includes('Which of these') ||
             question.includes('the following') ||
-            question.includes(' not ')
+            question.includes(' not ') ||
+            question.includes(' NOT ')
           ) {
             this.getData();
           }
