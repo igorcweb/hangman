@@ -40,6 +40,8 @@
         'https://opentdb.com/api.php?amount=1&category=14&type=multiple'
     },
 
+    selectedCategory: 'General Knowledge',
+
     drawGallows: () => {
       //gallows
       c.beginPath();
@@ -117,8 +119,8 @@
       button.classList.remove('show');
       answerText.innerHTML = '';
       mistakes = 0;
-      span.innerText = '';
-      h3.innerText = '';
+      span.innerHTML = '';
+      h3.innerHTML = '';
       usedLetters.length = 0;
       blank = '#fff';
       message.classList.remove('lose');
@@ -131,7 +133,8 @@
     },
 
     getData: function() {
-      let url = this.categories['General Knowledge'];
+      //console.log('selected category', this.categories[this.selectedCategory]);
+      let url = this.categories[this.selectedCategory];
       axios
         .get(url)
         .then(res => {
@@ -178,7 +181,6 @@
           }
 
           placeholder = placeholderArr.join('');
-
           answerText.innerHTML = placeholder;
 
           //Press Enter to skip question
@@ -196,7 +198,7 @@
             ) {
               //Append used letters to the page and add them to the array
               usedLetters.push(guess);
-              h3.innerText = 'Used Letters: ';
+              h3.innerHTML = 'Used Letters: ';
               let usedLetter = document.createTextNode(
                 `${guess.toUpperCase()} `
               );
@@ -274,7 +276,7 @@
       ul.classList.add('collapsed');
       hangman.classList.remove('slide');
       game.selectedCategory = this.dataset.category;
-      categoryTitle.innerText = game.selectedCategory;
+      categoryTitle.innerHTML = game.selectedCategory;
       game.reset();
     });
   });
@@ -283,5 +285,5 @@
     hangman.classList.remove('slide');
   });
   const year = document.querySelector('#year');
-  year.innerText = new Date().getFullYear();
+  year.innerHTML = new Date().getFullYear();
 })();

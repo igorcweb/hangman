@@ -24,7 +24,6 @@ div.hangman.slide {
 nav {
   position: relative;
   z-index: 1;
-
   height: 45px;
   background-color: steelblue;
   text-align: center;
