@@ -29,6 +29,35 @@ nav {
   background-color: steelblue;
   text-align: center;
 }
+
+h1 {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+h1,
+h2 {
+  text-align: center;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+h3 {
+  margin-top: 30px;
+  font-weight: normal;
+}
 h4.category {
   padding: 8px;
   z-index: 1;
@@ -56,9 +85,9 @@ ul {
 }
 
 ul.collapsed {
-  /* top: -340px; */
   left: -200px;
 }
+
 li {
   letter-spacing: 1px;
   border: 1px solid steelblue;
@@ -92,7 +121,7 @@ span.wrong {
 
 .message.survived::after {
   color: green;
-  content: 'You survived by a thread!';
+  content: 'You survived by the skin of your teeth!';
 }
 .message.win::after {
   color: green;
@@ -104,39 +133,12 @@ div.game {
   padding: 0 20px;
 }
 
-h1 {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  letter-spacing: 1px;
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-h1,
-h2 {
-  text-align: center;
-  font-weight: normal;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-top: 0;
-}
-h3 {
-  margin-top: 30px;
-  font-weight: normal;
-}
-
 canvas {
   margin-left: 115px;
 }
 
 p#answerText {
+  line-height: 2.5rem;
   text-align: center;
   font-size: 2rem;
   letter-spacing: 7px;
@@ -199,11 +201,11 @@ footer p {
     left: 0;
   }
   div.game {
+    padding: 0;
     position: absolute;
     top: 34px;
     left: 50%;
     transform: translateX(-50%);
-    /* margin-left: -270px; */
     max-width: 600px;
   }
   canvas {

@@ -19,26 +19,28 @@
   const categoryTitle = document.querySelector('span#category');
   const ul = document.querySelector('ul');
   const lis = document.querySelectorAll('li');
-  let correctAnswer;
-
-  const categories = {
-    Books: 'https://opentdb.com/api.php?amount=1&category=10&type=multiple',
-    'Computer Science':
-      'https://opentdb.com/api.php?amount=1&category=18&type=multiple',
-    'General Knowledge':
-      'https://opentdb.com/api.php?amount=1&category=9&type=multiple',
-    Geography: 'https://opentdb.com/api.php?amount=1&category=22&type=multiple',
-    Film: 'https://opentdb.com/api.php?amount=1&category=11&type=multiple',
-    History: 'https://opentdb.com/api.php?amount=1&category=23&type=multiple',
-    Music: 'https://opentdb.com/api.php?amount=1&category=12&type=multiple',
-    Politics: 'https://opentdb.com/api.php?amount=1&category=24&type=multiple',
-    Sports: 'https://opentdb.com/api.php?amount=1&category=21&type=multiple',
-    Television: 'https://opentdb.com/api.php?amount=1&category=14&type=multiple'
-  };
+  let answer;
 
   const game = {
-    selectedCategory: 'General Knowledge',
-    drawGallows: function() {
+    categories: {
+      Books: 'https://opentdb.com/api.php?amount=1&category=10&type=multiple',
+      'Computer Science':
+        'https://opentdb.com/api.php?amount=1&category=18&type=multiple',
+      'General Knowledge':
+        'https://opentdb.com/api.php?amount=1&category=9&type=multiple',
+      Geography:
+        'https://opentdb.com/api.php?amount=1&category=22&type=multiple',
+      Film: 'https://opentdb.com/api.php?amount=1&category=11&type=multiple',
+      History: 'https://opentdb.com/api.php?amount=1&category=23&type=multiple',
+      Music: 'https://opentdb.com/api.php?amount=1&category=12&type=multiple',
+      Politics:
+        'https://opentdb.com/api.php?amount=1&category=24&type=multiple',
+      Sports: 'https://opentdb.com/api.php?amount=1&category=21&type=multiple',
+      Television:
+        'https://opentdb.com/api.php?amount=1&category=14&type=multiple'
+    },
+
+    drawGallows: () => {
       //gallows
       c.beginPath();
       c.lineWidth = 10;
@@ -52,7 +54,7 @@
       c.lineTo(100, 160);
       c.stroke();
     },
-    drawMan: function() {
+    drawMan: () => {
       //head
       c.beginPath();
       c.arc(350, 220, 40, 0, 2 * Math.PI, true);
@@ -94,15 +96,15 @@
       if (mistakes === 6) {
         c.strokeStyle = '#ff0000';
         c.stroke();
-        setTimeout(function() {
+        setTimeout(() => {
           c.moveTo(346, 300);
           c.lineTo(295, 290);
           c.strokeStyle = '#000';
           c.stroke();
-          answerText.innerHTML = correctAnswer;
+          answerText.innerHTML = answer;
           message.classList.add('lose');
           button.classList.add('show');
-          document.onkeyup = function() {
+          document.onkeyup = () => {
             game.reset();
           };
         }, 1000);
@@ -127,39 +129,31 @@
       c.lineWidth = 10;
       this.getData();
     },
+
     getData: function() {
-      let url = categories[this.selectedCategory];
-      console.log('url:', url);
+      let url = this.categories['General Knowledge'];
       axios
         .get(url)
         .then(res => {
-          //Exclude answers that contain non-letter characters
           const lettersSpaces = /^[a-zA-Z ]+$/;
-          let answer = res.data.results[0].correct_answer.trim();
+          answer = res.data.results[0].correct_answer.trim();
           console.log('answer: ', answer);
-          if (!answer.match(lettersSpaces)) {
-            this.getData();
-          }
-
-          //Only use answers that are at least 6-letters-long
-          if (answer.length >= 6) {
-            correctAnswer = res.data.results[0].correct_answer;
-          } else {
-            this.getData();
-          }
           let question = res.data.results[0].question;
-
-          // Exclude multiple choice questions
           if (
-            question.includes('Which of these') ||
+            //Exclude multiple choice questions
+            question.includes('of these') ||
             question.includes('the following') ||
             question.includes(' not ') ||
-            question.includes(' NOT ')
+            question.includes(' NOT ') ||
+            //Exclude answers that contain non-letter characters
+            !answer.match(lettersSpaces) ||
+            //Exclude answers that are shorter than 6 letters
+            answer.length < 6
           ) {
             this.getData();
           }
 
-          //Replace letters with underscores
+          //Replace asnwer letters with underscores
           questionText.innerHTML = question;
           let placeholder = answer
             .split('')
@@ -188,7 +182,7 @@
           answerText.innerHTML = placeholder;
 
           //Press Enter to skip question
-          document.onkeyup = function(event) {
+          document.onkeyup = event => {
             if (event.keyCode === 13) {
               game.reset();
             }
