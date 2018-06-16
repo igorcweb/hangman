@@ -1,5 +1,4 @@
 (function() {
-  const body = document.querySelector('body');
   const hangman = document.querySelector('div.hangman');
   const canvas = document.querySelector('canvas');
   canvas.width = window.innerWidth;
@@ -9,6 +8,8 @@
   const c = canvas.getContext('2d');
   let blank = 'transparent';
   let mistakes = 0;
+  let streak = 0;
+  const streakDisplay = document.querySelector('#streak');
   const usedLetters = [];
   const span = document.createElement('span');
   const h3 = document.getElementById('used');
@@ -56,6 +57,7 @@
       c.lineTo(100, 160);
       c.stroke();
     },
+
     drawMan: () => {
       //head
       c.beginPath();
@@ -103,6 +105,8 @@
           c.lineTo(295, 290);
           c.strokeStyle = '#000';
           c.stroke();
+          streak = 0;
+          streakDisplay.textContent = streak;
           answerText.innerHTML = answer;
           message.classList.add('lose');
           button.classList.add('show');
@@ -115,6 +119,7 @@
         c.stroke();
       }
     },
+
     reset: function() {
       button.classList.remove('show');
       answerText.innerHTML = '';
@@ -133,14 +138,12 @@
     },
 
     getData: function() {
-      //console.log('selected category', this.categories[this.selectedCategory]);
       let url = this.categories[this.selectedCategory];
       axios
         .get(url)
         .then(res => {
           const lettersSpaces = /^[a-zA-Z ]+$/;
           answer = res.data.results[0].correct_answer.trim();
-          console.log('answer: ', answer);
           let question = res.data.results[0].question;
           if (
             //Exclude multiple choice questions
@@ -154,9 +157,11 @@
             answer.length < 6
           ) {
             this.getData();
+          } else {
+            console.log('answer: ', answer);
           }
 
-          //Replace asnwer letters with underscores
+          //Replace answer letters with underscores
           questionText.innerHTML = question;
           let placeholder = answer
             .split('')
@@ -189,7 +194,7 @@
               game.reset();
             }
 
-            let guess = event.key;
+            let guess = event.key.toLowerCase();
             if (
               //only listen for keys that haven't been used
               !usedLetters.includes(guess) &&
@@ -235,6 +240,8 @@
                 placeholder = placeholderArr.join('');
                 answerText.innerHTML = placeholder;
                 if (placeholder.indexOf('_') === -1) {
+                  streak += 1;
+                  streakDisplay.textContent = streak;
                   mistakes === 5
                     ? message.classList.add('survived')
                     : message.classList.add('win');
@@ -280,7 +287,7 @@
       game.reset();
     });
   });
-  body.addEventListener('click', () => {
+  document.addEventListener('click', () => {
     ul.classList.add('collapsed');
     hangman.classList.remove('slide');
   });

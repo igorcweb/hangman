@@ -57,7 +57,8 @@ h3 {
   margin-top: 30px;
   font-weight: normal;
 }
-h4.category {
+h4.category,
+h4.streak {
   padding: 8px;
   z-index: 1;
   position: absolute;
@@ -105,13 +106,13 @@ li:hover {
   background-color: #fff;
 }
 
-/* span.correct {
+span.correct {
   color: green;
 }
 
 span.wrong {
   color: red;
-} */
+}
 
 .message.lose::after {
   color: red;
@@ -133,6 +134,8 @@ div.game {
 }
 
 canvas {
+  width: 595px;
+  height: 370px;
   margin-left: 115px;
 }
 
@@ -193,8 +196,11 @@ footer p {
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  h4 {
+  h4.category {
     left: 8px;
+  }
+  h4.streak {
+    right: 8px;
   }
   ul {
     left: 0;
