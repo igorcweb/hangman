@@ -240,7 +240,7 @@
                 placeholder = placeholderArr.join('');
                 answerText.innerHTML = placeholder;
                 if (placeholder.indexOf('_') === -1) {
-                  streak += 1;
+                  streak++;
                   streakDisplay.textContent = streak;
                   mistakes === 5
                     ? message.classList.add('survived')
