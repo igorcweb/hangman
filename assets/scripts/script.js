@@ -120,7 +120,7 @@
       }
     },
 
-    //I had to make the arms and legs longer to completely erase them.
+    //I had to make the arms and legs longer in order to erase them completely.
     armsLegsErase: () => {
       //right leg
       c.beginPath();
@@ -199,10 +199,10 @@
             })
             .join('');
           let answerArr = answer.toLowerCase().split('');
-          spaceIndexArr = [];
-          let placeholderArr = placeholder.split('');
 
           //Add spaces if needed
+          spaceIndexArr = [];
+          let placeholderArr = placeholder.split('');
           if (answer.indexOf(' ') !== -1) {
             for (let i = 0; i < answerArr.length; i++) {
               if (answerArr[i] === ' ') {
@@ -218,6 +218,7 @@
           answerText.innerHTML = placeholder;
 
           //Press Enter to skip question
+          //This is a game hack.  I don't want the user to know about this unless they figure it out themselves.
           document.onkeyup = event => {
             if (event.keyCode === 13) {
               game.reset();
@@ -230,7 +231,7 @@
               //only listen for letter keys
               (event.keyCode >= 65 && event.keyCode <= 90)
             ) {
-              //Append guessed letters to the page and add them to the array
+              //Add guessed letters to the array and append them to the page
               guessedLetters.push(guess);
               guessedHeading.innerHTML = 'Guessed Letters: ';
 
@@ -264,9 +265,10 @@
 
                 //Capitalize the first letter of the answer
                 placeholderArr.splice(0, 1, placeholderArr[0].toUpperCase());
-
                 placeholder = placeholderArr.join('');
                 answerText.innerHTML = placeholder;
+
+                //Win
                 if (placeholder.indexOf('_') === -1) {
                   streak++;
                   streakDisplay.textContent = streak;
@@ -279,6 +281,7 @@
                   };
                 }
               } else {
+                //Lose
                 guessedLetter.setAttribute('class', 'wrong');
                 mistakes++;
                 game.drawMan();
