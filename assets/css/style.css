@@ -10,6 +10,10 @@ body {
   flex-direction: column;
 }
 
+canvas {
+  margin-left: 90px;
+}
+
 div.hangman {
   position: relative;
   left: 0;
@@ -19,6 +23,11 @@ div.hangman {
 
 div.hangman.slide {
   left: 200px;
+}
+
+div.game {
+  margin: -360px auto;
+  padding: 0 20px;
 }
 
 nav {
@@ -136,17 +145,6 @@ span.wrong {
   content: 'You win!';
 }
 
-div.game {
-  margin: 20px auto;
-  padding: 0 20px;
-}
-
-canvas {
-  width: 595px;
-  height: 370px;
-  margin-left: 115px;
-}
-
 p#answerText {
   line-height: 2.5rem;
   text-align: center;
@@ -229,6 +227,7 @@ footer p {
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   div.game {
+    margin: 0;
     padding: 0;
     position: absolute;
     top: 34px;

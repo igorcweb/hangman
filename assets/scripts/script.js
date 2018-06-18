@@ -46,63 +46,63 @@
     drawGallows: () => {
       //gallows
       c.beginPath();
-      c.lineWidth = 10;
-      c.moveTo(0, 600);
-      c.lineTo(410, 600);
-      c.moveTo(100, 600);
-      c.lineTo(100, 100);
-      c.lineTo(350, 100);
-      c.lineTo(350, 185);
-      c.moveTo(155, 100);
-      c.lineTo(100, 160);
+      c.lineWidth = 4;
+      c.moveTo(0, 320);
+      c.lineTo(200, 320);
+      c.moveTo(45, 320);
+      c.lineTo(45, 50);
+      c.lineTo(170, 50);
+      c.lineTo(170, 90);
+      c.moveTo(70, 50);
+      c.lineTo(45, 80);
       c.stroke();
     },
 
     drawMan: () => {
       //head
       c.beginPath();
-      c.arc(350, 220, 40, 0, 2 * Math.PI, true);
+      c.arc(170, 112, 21, 0, 2 * Math.PI, true);
       c.strokeStyle =
         mistakes === 1 ? '#ff0000' : mistakes > 1 ? '#000' : blank;
       c.stroke();
       //torso
       c.beginPath();
-      c.moveTo(350, 265);
-      c.lineTo(350, 350);
+      c.moveTo(170, 135);
+      c.lineTo(170, 185);
       c.strokeStyle =
         mistakes === 2 ? '#ff0000' : mistakes > 2 ? '#000' : blank;
       c.stroke();
       //right leg
       c.beginPath();
-      c.moveTo(350, 348);
-      c.lineTo(400, 415);
+      c.moveTo(170, 185);
+      c.lineTo(190, 220);
       c.strokeStyle =
         mistakes === 3 ? '#ff0000' : mistakes > 3 ? '#000' : blank;
       c.stroke();
       //left leg
       c.beginPath();
-      c.moveTo(348, 348);
-      c.lineTo(300, 415);
+      c.moveTo(170, 185);
+      c.lineTo(150, 220);
       c.strokeStyle =
         mistakes === 4 ? '#ff0000' : mistakes > 4 ? '#000' : blank;
       c.stroke();
       //right arm
       c.beginPath();
-      c.moveTo(354, 300);
-      c.lineTo(405, 290);
+      c.moveTo(170, 160);
+      c.lineTo(197, 155);
       c.strokeStyle =
         mistakes === 5 ? '#ff0000' : mistakes > 5 ? '#000' : blank;
       c.stroke();
       //left arm
       c.beginPath();
-      c.moveTo(346, 300);
-      c.lineTo(295, 290);
+      c.moveTo(170, 160);
+      c.lineTo(143, 155);
       if (mistakes === 6) {
         c.strokeStyle = '#ff0000';
         c.stroke();
         setTimeout(() => {
-          c.moveTo(346, 300);
-          c.lineTo(295, 290);
+          c.moveTo(170, 160);
+          c.lineTo(143, 155);
           c.strokeStyle = '#000';
           c.stroke();
           streak = 0;
@@ -131,9 +131,9 @@
       message.classList.remove('lose');
       message.classList.remove('win');
       message.classList.remove('survived');
-      c.lineWidth = 13;
+      c.lineWidth = 8;
       this.drawMan();
-      c.lineWidth = 10;
+      c.lineWidth = 4;
       this.getData();
     },
 
