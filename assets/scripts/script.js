@@ -12,7 +12,7 @@
   const streakDisplay = document.querySelector('#streak');
   const guessedLetters = [];
   const span = document.createElement('span');
-  const h3 = document.getElementById('guessed');
+  const guessedHeading = document.getElementById('guessed');
   const questionText = document.querySelector('#questionText');
   const answerText = document.querySelector('#answerText');
   const next = document.querySelector('#next');
@@ -125,7 +125,7 @@
       answerText.innerHTML = '';
       mistakes = 0;
       span.innerHTML = '';
-      h3.innerHTML = '';
+      guessedHeading.innerHTML = '';
       guessedLetters.length = 0;
       blank = '#fff';
       message.classList.remove('lose');
@@ -203,7 +203,7 @@
             ) {
               //Append guessed letters to the page and add them to the array
               guessedLetters.push(guess);
-              h3.innerHTML = 'Guessed Letters: ';
+              guessedHeading.innerHTML = 'Guessed Letters: ';
 
               let guessedLetter = document.createElement('span');
               guessedLetter.textContent = `${guess.toUpperCase()} `;
@@ -211,7 +211,6 @@
               // Check if the guess matches one of the letters
               if (answer.toLowerCase().indexOf(guess) !== -1) {
                 guessedLetter.setAttribute('class', 'correct');
-
                 indexArr = [];
                 for (let i = 0; i < answerArr.length; i++) {
                   if (answerArr[i] === guess) {
@@ -256,7 +255,7 @@
                 game.drawMan();
               }
               span.appendChild(guessedLetter);
-              h3.appendChild(span);
+              guessedHeading.appendChild(span);
             }
           };
         })
