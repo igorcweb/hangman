@@ -10,9 +10,9 @@
   let mistakes = 0;
   let streak = 0;
   const streakDisplay = document.querySelector('#streak');
-  const usedLetters = [];
+  const guessedLetters = [];
   const span = document.createElement('span');
-  const h3 = document.getElementById('used');
+  const h3 = document.getElementById('guessed');
   const questionText = document.querySelector('#questionText');
   const answerText = document.querySelector('#answerText');
   const next = document.querySelector('#next');
@@ -126,7 +126,7 @@
       mistakes = 0;
       span.innerHTML = '';
       h3.innerHTML = '';
-      usedLetters.length = 0;
+      guessedLetters.length = 0;
       blank = '#fff';
       message.classList.remove('lose');
       message.classList.remove('win');
@@ -196,18 +196,18 @@
 
             let guess = event.key.toLowerCase();
             if (
-              //only listen for keys that haven't been used
-              !usedLetters.includes(guess) &&
+              //only listen for keys that haven't been guessed
+              !guessedLetters.includes(guess) &&
               //only listen for letter keys
               (event.keyCode >= 65 && event.keyCode <= 90)
             ) {
-              //Append used letters to the page and add them to the array
-              usedLetters.push(guess);
-              h3.innerHTML = 'Used Letters: ';
-              let usedLetter = document.createTextNode(
+              //Append guessed letters to the page and add them to the array
+              guessedLetters.push(guess);
+              h3.innerHTML = 'Guessed Letters: ';
+              let guessedLetter = document.createTextNode(
                 `${guess.toUpperCase()} `
               );
-              span.appendChild(usedLetter);
+              span.appendChild(guessedLetter);
               h3.appendChild(span);
 
               // Check if the guess matches one of the letters

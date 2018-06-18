@@ -60,10 +60,7 @@ h3 {
 h4.category,
 h4.streak {
   padding: 8px;
-  z-index: 1;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   font-size: 1.2rem;
   letter-spacing: 1px;
   color: #fff;
@@ -71,7 +68,15 @@ h4.streak {
   margin: 0;
 }
 h4.category {
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
+}
+
+h4.streak {
+  right: 8px;
+  top: 45px;
+  color: steelblue;
 }
 
 ul {
@@ -82,6 +87,7 @@ ul {
   padding-left: 0;
   position: absolute;
   list-style: none;
+  left: 0;
   top: 29px;
   transition: left 0.3s ease-in-out;
 }
@@ -192,7 +198,8 @@ footer p {
   color: #333;
 }
 
-@media screen and (min-width: 960px) {
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
   h1 {
     left: 50%;
     top: 50%;
@@ -202,11 +209,25 @@ footer p {
     left: 8px;
   }
   h4.streak {
+    color: #fff;
+    top: 50%;
+    transform: translateY(-50%);
     right: 8px;
   }
   ul {
     left: 0;
   }
+
+  canvas {
+    margin-left: 30px;
+  }
+  button {
+    width: 265px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
   div.game {
     padding: 0;
     position: absolute;
@@ -214,11 +235,5 @@ footer p {
     left: 50%;
     transform: translateX(-50%);
     max-width: 600px;
-  }
-  canvas {
-    margin-left: 30px;
-  }
-  button {
-    width: 265px;
   }
 }
