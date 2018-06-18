@@ -204,14 +204,14 @@
               //Append guessed letters to the page and add them to the array
               guessedLetters.push(guess);
               h3.innerHTML = 'Guessed Letters: ';
-              let guessedLetter = document.createTextNode(
-                `${guess.toUpperCase()} `
-              );
-              span.appendChild(guessedLetter);
-              h3.appendChild(span);
+
+              let guessedLetter = document.createElement('span');
+              guessedLetter.textContent = `${guess.toUpperCase()} `;
 
               // Check if the guess matches one of the letters
               if (answer.toLowerCase().indexOf(guess) !== -1) {
+                guessedLetter.setAttribute('class', 'correct');
+
                 indexArr = [];
                 for (let i = 0; i < answerArr.length; i++) {
                   if (answerArr[i] === guess) {
@@ -251,9 +251,12 @@
                   };
                 }
               } else {
+                guessedLetter.setAttribute('class', 'wrong');
                 mistakes++;
                 game.drawMan();
               }
+              span.appendChild(guessedLetter);
+              h3.appendChild(span);
             }
           };
         })
