@@ -106,7 +106,7 @@
           c.strokeStyle = '#000';
           c.stroke();
           streak = 0;
-          streakDisplay.textContent = streak;
+          streakDisplay.innerHTML = streak;
           answerText.innerHTML = answer;
           message.classList.add('lose');
           button.classList.add('show');
@@ -131,7 +131,7 @@
       message.classList.remove('lose');
       message.classList.remove('win');
       message.classList.remove('survived');
-      c.lineWidth = 8;
+      c.lineWidth = 7;
       this.drawMan();
       c.lineWidth = 4;
       this.getData();
