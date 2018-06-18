@@ -61,13 +61,13 @@
     drawMan: () => {
       //head
       c.beginPath();
-      c.arc(170, 112, 21, 0, 2 * Math.PI, true);
+      c.arc(170, 112, 20, 0, 2 * Math.PI, true);
       c.strokeStyle =
         mistakes === 1 ? '#ff0000' : mistakes > 1 ? '#000' : blank;
       c.stroke();
       //torso
       c.beginPath();
-      c.moveTo(170, 135);
+      c.moveTo(170, 134);
       c.lineTo(170, 185);
       c.strokeStyle =
         mistakes === 2 ? '#ff0000' : mistakes > 2 ? '#000' : blank;
@@ -75,28 +75,28 @@
       //right leg
       c.beginPath();
       c.moveTo(170, 185);
-      c.lineTo(190, 220);
+      c.lineTo(194, 224);
       c.strokeStyle =
         mistakes === 3 ? '#ff0000' : mistakes > 3 ? '#000' : blank;
       c.stroke();
       //left leg
       c.beginPath();
       c.moveTo(170, 185);
-      c.lineTo(150, 220);
+      c.lineTo(146, 224);
       c.strokeStyle =
         mistakes === 4 ? '#ff0000' : mistakes > 4 ? '#000' : blank;
       c.stroke();
       //right arm
       c.beginPath();
-      c.moveTo(170, 160);
-      c.lineTo(197, 155);
+      c.moveTo(172, 160);
+      c.lineTo(199, 155);
       c.strokeStyle =
         mistakes === 5 ? '#ff0000' : mistakes > 5 ? '#000' : blank;
       c.stroke();
       //left arm
       c.beginPath();
-      c.moveTo(170, 160);
-      c.lineTo(143, 155);
+      c.moveTo(168, 160);
+      c.lineTo(141, 155);
       if (mistakes === 6) {
         c.strokeStyle = '#ff0000';
         c.stroke();
@@ -120,6 +120,34 @@
       }
     },
 
+    //I had to make the arms and legs longer to completely erase them.
+    armsLegsErase: () => {
+      //right leg
+      c.beginPath();
+      c.moveTo(170, 185);
+      c.lineTo(197, 227);
+      c.strokeStyle = blank;
+      c.stroke();
+      //left leg
+      c.beginPath();
+      c.moveTo(170, 185);
+      c.lineTo(143, 227);
+      c.strokeStyle = blank;
+      c.stroke();
+      //right arm
+      c.beginPath();
+      c.moveTo(172, 160);
+      c.lineTo(202, 153);
+      c.strokeStyle = blank;
+      c.stroke();
+      //left arm
+      c.beginPath();
+      c.moveTo(168, 160);
+      c.lineTo(138, 153);
+      c.strokeStyle = blank;
+      c.stroke();
+    },
+
     reset: function() {
       button.classList.remove('show');
       answerText.innerHTML = '';
@@ -133,6 +161,7 @@
       message.classList.remove('survived');
       c.lineWidth = 7;
       this.drawMan();
+      this.armsLegsErase();
       c.lineWidth = 4;
       this.getData();
     },
