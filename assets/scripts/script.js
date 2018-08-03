@@ -115,7 +115,7 @@
           };
         }, 1000);
       } else {
-        c.strokeStyle = '#fff';
+        c.strokeStyle = '#e9ebee';
         c.stroke();
       }
     },
@@ -155,7 +155,7 @@
       span.innerHTML = '';
       guessedHeading.innerHTML = '';
       guessedLetters.length = 0;
-      blank = '#fff';
+      blank = '#e9ebee';
       message.classList.remove('lose');
       message.classList.remove('win');
       message.classList.remove('survived');
