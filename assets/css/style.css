@@ -200,6 +200,9 @@ footer p {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
+  p#questionText {
+    font-size: 1.5rem;
+  }
   h1 {
     left: 50%;
     top: 50%;
@@ -233,6 +236,9 @@ footer p {
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  p#questionText {
+    font-size: 1.6rem;
+  }
   div.game {
     margin: 0;
     padding: 0;
