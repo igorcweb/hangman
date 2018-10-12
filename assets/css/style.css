@@ -162,11 +162,12 @@ p#questionText {
 }
 
 button {
-  opacity: 0;
+  cursor: pointer;
+  visibility: hidden;
 }
 
 button.show {
-  opacity: 1;
+  visibility: visible;
 }
 
 button {
